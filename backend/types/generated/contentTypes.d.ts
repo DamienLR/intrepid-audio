@@ -362,6 +362,47 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiReleaseRelease extends Schema.CollectionType {
+  collectionName: 'releases';
+  info: {
+    singularName: 'release';
+    pluralName: 'releases';
+    displayName: 'Release';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.RichText & Attribute.Required;
+    genre: Attribute.Enumeration<
+      ['Drum and Bass', 'Dubstep', 'Garage', 'House']
+    > &
+      Attribute.Required;
+    price: Attribute.Integer & Attribute.Required;
+    coverArt: Attribute.Media & Attribute.Required;
+    slug: Attribute.UID<'api::release.release', 'title'> & Attribute.Required;
+    releasedOn: Attribute.Date & Attribute.Required;
+    tracklist: Attribute.JSON & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::release.release',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::release.release',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -687,6 +728,7 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::release.release': ApiReleaseRelease;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
