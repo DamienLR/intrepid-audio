@@ -683,6 +683,7 @@ export interface ApiArtistArtist extends Schema.CollectionType {
     singularName: 'artist';
     pluralName: 'artists';
     displayName: 'Artist';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -692,6 +693,11 @@ export interface ApiArtistArtist extends Schema.CollectionType {
     description: Attribute.RichText & Attribute.Required;
     portrait: Attribute.Media & Attribute.Required;
     slug: Attribute.UID<'api::artist.artist', 'name'>;
+    releases: Attribute.Relation<
+      'api::artist.artist',
+      'manyToMany',
+      'api::release.release'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -733,6 +739,11 @@ export interface ApiReleaseRelease extends Schema.CollectionType {
     slug: Attribute.UID<'api::release.release', 'title'> & Attribute.Required;
     releasedOn: Attribute.Date & Attribute.Required;
     tracklist: Attribute.JSON & Attribute.Required;
+    artists: Attribute.Relation<
+      'api::release.release',
+      'manyToMany',
+      'api::artist.artist'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

@@ -54,6 +54,12 @@
     "tracklist": {
       "type": "json",
       "required": true
+    },
+    "artists": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::artist.artist",
+      "mappedBy": "releases"
     }
   }
 }
