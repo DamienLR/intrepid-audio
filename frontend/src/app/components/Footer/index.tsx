@@ -7,7 +7,7 @@ import {
 export default function Footer() {
   return (
     <footer className=" bg-slate-950">
-      <div className="container flex flex-col p-4 mx-auto md:flex-row md:justify-between">
+      <div className="container flex flex-col py-4 px-4 md:px-0 mx-auto md:flex-row md:justify-between">
         <div className="flex justify-center gap-4 md:gap-6">
           {/* #f1f5f9 is the same as text-slate-100 */}
           {/* mr-1 because the facebook logo has weird spacing and this makes things more uniform */}
